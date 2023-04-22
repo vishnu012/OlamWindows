@@ -6,9 +6,11 @@
 #include "olam.h"
 #include "./ui_olam.h"
 #include "olamdbhandler.h"
+#include "about.h"
 
 Olam::Olam(QWidget *parent) : QMainWindow(parent) , ui(new Ui::Olam){
     ui->setupUi(this);
+
 }
 
 Olam::~Olam()
@@ -17,15 +19,18 @@ Olam::~Olam()
 }
 
 
+
 void Olam::on_searchButton_clicked(){
+
+    ui->ResulttextBrowser->setText(""); //reset UI every time
 
     OlamDBHandler database;
     database.createConnection("D:\\Projects\\OlamWindows\\OlamWindows\\olamdict.db");
 
-    QString outputText = "";
+    QString outputText = "Meaning     :    Part of speech\n _________________________________\n\n";
 
     QString searchText = ui->searchlineEdit -> text();
-    qDebug() << "Text entered: " << searchText;
+    qDebug() << "Text searched: " << searchText;
 
     if(searchText == ""){
         QMessageBox::information(this, "Warning", "Enter a text");
@@ -33,13 +38,36 @@ void Olam::on_searchButton_clicked(){
     else{
 
         QMap<QString, QString>::const_iterator it;
-        QMap<QString, QString> returned_result = database.return_result(searchText);
-        for (it = returned_result.constBegin(); it != returned_result.constEnd(); ++it) {
-            QString key = it.key();
-            QString value = it.value();
-            outputText += QString("%1: %2\n").arg(key).arg(value);
+        QMap<QString, QString> returnedResult = database.return_result(searchText);
+
+        if(returnedResult.empty()){
+          QMessageBox::information(this, "Warning", "Word not found");
         }
-        ui->ResulttextBrowser->setText(outputText);
+        else{
+            for (it = returnedResult.constBegin(); it != returnedResult.constEnd(); ++it) {
+                QString key = it.key();
+                QString value = it.value();
+                outputText += QString("%1    :    %2\n").arg(key).arg(value);
+            }
+            ui->ResulttextBrowser->setText(outputText);
+        }
     }
+}
+
+
+void Olam::on_actionExit_triggered()
+{
+    qDebug() <<"exit button triggered ";
+    QCoreApplication::quit();
+
+}
+
+
+void Olam::on_actionAbout_triggered()
+{
+    //trigger the about window
+    qDebug() <<"about window triggered ";
+    About *aboutWindow = new About();
+    aboutWindow->show();
 }
 

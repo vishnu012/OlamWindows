@@ -22,6 +22,9 @@ set(PROJECT_SOURCES
         olam.ui
         olamdbhandler.cpp
         olamdbhandler.h
+        about.cpp
+        about.h
+        about.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

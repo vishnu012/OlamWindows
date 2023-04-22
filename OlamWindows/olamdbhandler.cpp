@@ -24,6 +24,9 @@ QMap<QString, QString> OlamDBHandler::return_result(QString searchWord){
 
     QMap<QString, QString> searchResult;
 
+    searchWord = searchWord.trimmed();
+    searchWord = searchWord.left(1).toUpper() + searchWord.mid(1); // Capitalise the first char
+
     QSqlQuery searchQuery;
     searchQuery.prepare("SELECT malayalam_definition, part_of_speech FROM data WHERE english_word = ?");
     searchQuery.addBindValue(searchWord);

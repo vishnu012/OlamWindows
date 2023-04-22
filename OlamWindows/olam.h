@@ -23,6 +23,10 @@ private slots:
 
     void on_searchButton_clicked();
 
+    void on_actionExit_triggered();
+
+    void on_actionAbout_triggered();
+
 private:
     Ui::Olam *ui;
 };
