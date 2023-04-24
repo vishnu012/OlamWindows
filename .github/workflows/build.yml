@@ -1,0 +1,23 @@
+name: Build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        qt-version: ['6.5.0'] 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install QT
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: ${{ matrix.qt-version }}
+        host: windows
+        components: qtbase qtdeclarative qtsvg 
+    - name: Configure CMake
+      run: cmake -DCMAKE_PREFIX_PATH=C:/Qt/${{ matrix.qt-version }}/mingw81_64
+      working-directory: ./OlamWindows
+    - name: Build
+      working-directory: ./OlamWindows
+      run: cmake --build . 
