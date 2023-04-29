@@ -3,7 +3,14 @@
 #define OLAM_H
 
 #include <QMainWindow>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QString>
+#include <QMessageBox>
 
+#include "./ui_olam.h"
+#include "olamdbhandler.h"
+#include "about.h"
 
 
 QT_BEGIN_NAMESPACE

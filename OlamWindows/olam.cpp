@@ -1,12 +1,4 @@
-#include <QLineEdit>
-#include <QPushButton>
-#include <QString>
-#include <QMessageBox>
-
 #include "olam.h"
-#include "./ui_olam.h"
-#include "olamdbhandler.h"
-#include "about.h"
 
 Olam::Olam(QWidget *parent) : QMainWindow(parent) , ui(new Ui::Olam){
     ui->setupUi(this);
@@ -25,7 +17,7 @@ void Olam::on_searchButton_clicked(){
     ui->ResulttextBrowser->setText(""); //reset UI every time
 
     OlamDBHandler database;
-    database.createConnection("D:\\Projects\\OlamWindows\\OlamWindows\\olamdict.db");
+    database.createConnection("D:\\Projects\\OlamWindows\\OlamWindows\\db\\olamdict.db");
 
     QString outputText = "Meaning     :    Part of speech\n _________________________________\n\n";
 

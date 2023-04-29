@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>250</height>
+    <width>500</width>
+    <height>360</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,13 +18,41 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>350</width>
-    <height>250</height>
+    <width>500</width>
+    <height>360</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>About</string>
   </property>
+  <widget class="QTabWidget" name="contact">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>511</width>
+     <height>361</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>2</number>
+   </property>
+   <widget class="QWidget" name="about">
+    <attribute name="title">
+     <string>About</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="licence">
+    <attribute name="title">
+     <string>Licence</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="tab_3">
+    <attribute name="title">
+     <string>Contact</string>
+    </attribute>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>

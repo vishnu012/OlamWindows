@@ -54,6 +54,11 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
    </widget>
    <widget class="QTextBrowser" name="ResulttextBrowser">
     <property name="geometry">
@@ -81,6 +86,11 @@
       <width>580</width>
       <height>460</height>
      </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
    </widget>
   </widget>

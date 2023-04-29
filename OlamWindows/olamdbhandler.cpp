@@ -39,6 +39,16 @@ QMap<QString, QString> OlamDBHandler::return_result(QString searchWord){
     while (searchQuery.next()) {
         QString malayalam_definition = searchQuery.value("malayalam_definition").toString();
         QString part_of_speech = searchQuery.value("part_of_speech").toString();
+        if (part_of_speech == "n")
+            part_of_speech = "noun";
+        else if (part_of_speech == "v")
+            part_of_speech = "verb";
+        else if (part_of_speech == "a")
+            part_of_speech = "adj";
+        else if (part_of_speech == "adv")
+            part_of_speech = "adverb";
+        else
+            part_of_speech = "unknown";
         searchResult.insert(malayalam_definition, part_of_speech);
         qDebug() << "malayalam_definition" << malayalam_definition << ", part_of_speech:" << part_of_speech ;
 
