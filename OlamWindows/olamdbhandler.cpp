@@ -6,18 +6,22 @@ OlamDBHandler::OlamDBHandler(){
 }
 
 
-void OlamDBHandler::createConnection(QString file_location)
+bool OlamDBHandler::createConnection(QString file_location)
 {
+    bool connection_status = false;
     QSqlDatabase olamdict = QSqlDatabase::addDatabase("QSQLITE");
     olamdict.setDatabaseName(file_location);
 
     if (!olamdict.open()) {
         qDebug() << "Failed to connect to database!";
+        connection_status = true;
     }
     else{
         qDebug() << "Connection sucessfull";
+        connection_status = false;
     }
 
+    return connection_status;
 }
 
 QMap<QString, QString> OlamDBHandler::return_result(QString searchWord){

@@ -14,34 +14,41 @@ Olam::~Olam()
 
 void Olam::on_searchButton_clicked(){
 
+    bool connection_status = false;
+
     ui->ResulttextBrowser->setText(""); //reset UI every time
 
     OlamDBHandler database;
-    database.createConnection("D:\\Projects\\OlamWindows\\OlamWindows\\db\\olamdict.db");
+    connection_status = database.createConnection("D:\\Projects\\OlamWindows\\OlamWindows\\db\\olamdict.db");
 
     QString outputText = "Meaning     :    Part of speech\n _________________________________\n\n";
 
     QString searchText = ui->searchlineEdit -> text();
     qDebug() << "Text searched: " << searchText;
 
-    if(searchText == ""){
-        QMessageBox::information(this, "Warning", "Enter a text");
+    if(connection_status){
+        QMessageBox::information(this, "Error", "DB connection failed");
     }
     else{
-
-        QMap<QString, QString>::const_iterator it;
-        QMap<QString, QString> returnedResult = database.return_result(searchText);
-
-        if(returnedResult.empty()){
-          QMessageBox::information(this, "Warning", "Word not found");
+        if(searchText == ""){
+            QMessageBox::information(this, "Warning", "Enter a text");
         }
         else{
-            for (it = returnedResult.constBegin(); it != returnedResult.constEnd(); ++it) {
-                QString key = it.key();
-                QString value = it.value();
-                outputText += QString("%1    :    %2\n").arg(key).arg(value);
+
+            QMap<QString, QString>::const_iterator it;
+            QMap<QString, QString> returnedResult = database.return_result(searchText);
+
+            if(returnedResult.empty()){
+              QMessageBox::information(this, "Warning", "Word not found");
             }
-            ui->ResulttextBrowser->setText(outputText);
+            else{
+                for (it = returnedResult.constBegin(); it != returnedResult.constEnd(); ++it) {
+                    QString key = it.key();
+                    QString value = it.value();
+                    outputText += QString("%1    :    %2\n").arg(key).arg(value);
+                }
+                ui->ResulttextBrowser->setText(outputText);
+            }
         }
     }
 }

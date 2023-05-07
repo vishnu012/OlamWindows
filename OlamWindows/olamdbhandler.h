@@ -12,7 +12,7 @@
 class OlamDBHandler{
     public:
         OlamDBHandler();
-        void createConnection(QString);
+        bool createConnection(QString);
         QMap<QString, QString> return_result(QString);
 };
 
