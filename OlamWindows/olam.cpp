@@ -18,8 +18,8 @@ void Olam::on_searchButton_clicked(){
 
     ui->ResulttextBrowser->setText(""); //reset UI every time
 
-    OlamDBHandler database;
-    connection_status = database.createConnection("D:\\Projects\\OlamWindows\\OlamWindows\\db\\olamdict.db");
+    OlamDBHandler database("D:\\Projects\\OlamWindows\\OlamWindows\\db\\olamdict.db");
+    connection_status = database.connectionStatus();
 
     QString outputText = "Meaning     :    Part of speech\n _________________________________\n\n";
 

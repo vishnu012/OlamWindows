@@ -11,9 +11,10 @@
 
 class OlamDBHandler{
     public:
-        OlamDBHandler();
-        bool createConnection(QString);
+        OlamDBHandler(QString);
+        bool connectionStatus();
         QMap<QString, QString> return_result(QString);
+        QSqlDatabase db;
 };
 
 #endif // OLAMDBHANDLER_H

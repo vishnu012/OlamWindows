@@ -1,18 +1,19 @@
 
 #include "olamdbhandler.h"
 
-OlamDBHandler::OlamDBHandler(){
+OlamDBHandler::OlamDBHandler(QString file_location)
+{
+    this-> db = QSqlDatabase::addDatabase("QSQLITE");
+    this->db.setDatabaseName(file_location);
 
 }
 
 
-bool OlamDBHandler::createConnection(QString file_location)
+bool OlamDBHandler::connectionStatus()
 {
-    bool connection_status = false;
-    QSqlDatabase olamdict = QSqlDatabase::addDatabase("QSQLITE");
-    olamdict.setDatabaseName(file_location);
 
-    if (!olamdict.open()) {
+    bool connection_status = false;
+    if (!this->db.open()) {
         qDebug() << "Failed to connect to database!";
         connection_status = true;
     }
@@ -31,7 +32,7 @@ QMap<QString, QString> OlamDBHandler::return_result(QString searchWord){
     searchWord = searchWord.trimmed();
     searchWord = searchWord.left(1).toUpper() + searchWord.mid(1); // Capitalise the first char
 
-    QSqlQuery searchQuery;
+    QSqlQuery searchQuery(this->db);
     searchQuery.prepare("SELECT malayalam_definition, part_of_speech FROM data WHERE english_word = ?");
     searchQuery.addBindValue(searchWord);
 
